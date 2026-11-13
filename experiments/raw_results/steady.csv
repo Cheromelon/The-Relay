@@ -1,0 +1,11 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,raw_status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade,queue_wait_ms,reason
+1,steady,stand-in,2026-11-12T08:27:49.083362+00:00,911.2378000013462,1068.12,ok,ok,0,750,300,stand-in-no-retrieval,,0.29,
+2,steady,stand-in,2026-11-12T08:27:49.588445+00:00,721.0945999998389,893.53,ok,ok,0,750,300,stand-in-no-retrieval,,0.3,
+3,steady,stand-in,2026-11-12T08:27:50.088122+00:00,751.3283000007784,924.86,ok,ok,0,750,300,stand-in-no-retrieval,,0.24,
+4,steady,stand-in,2026-11-12T08:27:50.604615+00:00,826.4087000012678,999.99,ok,ok,0,750,300,stand-in-no-retrieval,,0.22,
+5,steady,stand-in,2026-11-12T08:27:51.122320+00:00,796.0575999978976,970.99,ok,ok,0,750,300,stand-in-no-retrieval,,0.25,
+6,steady,stand-in,2026-11-12T08:27:51.636243+00:00,612.0610000049439,785.82,ok,ok,0,750,300,stand-in-no-retrieval,,0.31,
+7,steady,stand-in,2026-11-12T08:27:52.140655+00:00,663.0167000029562,838.03,ok,ok,0,750,300,stand-in-no-retrieval,,0.28,
+8,steady,stand-in,2026-11-12T08:27:52.646187+00:00,759.7393999995687,933.88,ok,ok,0,750,300,stand-in-no-retrieval,,0.48,
+9,steady,stand-in,2026-11-12T08:27:53.136206+00:00,616.4261999942712,789.98,ok,ok,0,750,300,stand-in-no-retrieval,,0.44,
+10,steady,stand-in,2026-11-12T08:27:53.658004+00:00,928.2240999982856,1099.95,ok,ok,0,750,300,stand-in-no-retrieval,,0.11,

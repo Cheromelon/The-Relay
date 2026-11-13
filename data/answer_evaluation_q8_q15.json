@@ -1,0 +1,92 @@
+[
+  {
+    "question_id": 8,
+    "question": "What is the role of the text and audio representations in Moshi?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 93.52,
+    "answer": "**Role of the text and audio representations in Moshi**\n\nMoshi uses two complementary streams of representations that are generated and processed in a hierarchical, streaming fashion:\n\n| Representation | Purpose in Moshi |\n|-----------------|------------------|\n| **Text tokens** | 1. Provide the linguistic content that Moshi speaks or listens to. <br>2. Enable control of the system (e.g., PAD or EPAD tokens can silence or trigger speech). <br>3. Are time‑aligned with the acoustic stream so that the model can maintain a coherent dialogue. |\n| **Audio tokens** | 1. Encode the acoustic waveform through a neural audio codec (residual vector quantization) that also incorporates semantic knowledge distilled from a self‑supervised speech model (Mimi). <br>2. Capture non‑linguistic information such as prosody, emotion, and acoustic conditions, allowing Moshi to generate varied voices and emotions. <br>3. Allow Moshi to listen and speak in real time (full‑duplex) by modeling acoustic tokens hierarchically alongside semantic tokens. |\n\nTogether, the text and audio streams enable Moshi to **exploit all information from the user—both linguistic and non‑linguistic—while producing speech in real time**. The hierarchical, streaming generation of semantic and acoustic tokens for both the user and Moshi, along with time‑aligned text tokens, is a core architectural feature of the model【Passage 2】【Passage 5】. The audio tokens, produced alongside text and semantic tokens, give Moshi the ability to generate a wide range of emotions, voices, and acoustic conditions【Passage 1】. The text stream also offers control mechanisms, such as forcing a PAD token to silence Moshi or an EPAD token to make it speak immediately【Passage 4】.",
+    "status": "ok",
+    "first_token_ms": 1403.1373000034364,
+    "total_ms": 1538.2024999998976,
+    "tokens_in": 844,
+    "tokens_out": 579,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "s to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone. Finally, as the model produces acoustic tokens along with text and semantic tokens, it can generate an arbitrary range of emotions, voices and acoustic conditions. To the best of our knowledge, Moshi is the first audio language model that successfully addresses the many aforementioned challenges of spoken dialogue."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 17,
+        "text": "s between the user and Moshi: Moshi can speak and listen at all time, and do both at once if needed. In particular, when the user speaks and Moshi stays silent, the corresponding audio tokens for Moshi’s stream decode into “natural silence”, a near silent waveform, instead of having a fixed, well defined value; At the same time, Moshi’s text stream will be filled with PAD tokens. As a result, the text stream can provide interesting ways of controlling Moshi, for instance, forcing the sampling of a EPAD token will make Moshi start talking immediately."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner M"
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 15,
+    "question": "What limitations of fixed chunking does the paper discuss?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 15.76,
+    "answer": "The paper points out several drawbacks of using a fixed (static) chunking strategy:\n\n1. **Mis‑alignment during upsampling** – When chunk boundaries are chosen without a smoothing module, the upsampling step can become mis‑aligned, causing the model to propagate information from incorrect contexts.  \n   *Citation:* “Suboptimal chunking without a smoothing module. This creates misalignment during upsampling, causing information from incorrect contexts to propagate.” (Dynamic Chunking for End‑to‑End Hierarchical Sequence Modeling, p. 7)\n\n2. **Inability to capture natural token boundaries** – Static downsampling (fixed chunking) does not take advantage of semantic or statistical cues in the input, so it often fails to identify the natural boundaries that would be useful for hierarchical modeling.  \n   *Citation:* “An improvement to hierarchical architectures with static downsampling is to use content‑aware chunking strategies that attempt to identify natural token boundaries based on semantic or statistical properties of the input data.” (Dynamic Chunking for End‑to‑End Hierarchical Sequence Modeling, p. 32)\n\n3. **Weaker performance compared to data‑dependent chunking** – A simple fixed strategy that pools every \\(k\\) tokens is expected to perform worse than chunking methods that learn boundaries from the data.  \n   *Citation:* “H‑Net (pool) is a baseline ablating the effect of a simple chunking strategy that pools every \\(k\\) tokens, which is expected to be weaker than all of the data‑dependent chunking strategies.” (Dynamic Chunking for End‑to‑End Hierarchical Sequence Modeling, p. 11)\n\nThese points collectively highlight the limitations of fixed",
+    "status": "ok",
+    "first_token_ms": 1278.9728000061586,
+    "total_ms": 1640.3850999995484,
+    "tokens_in": 909,
+    "tokens_out": 1000,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 7,
+        "text": "u c t ! Figure 2: Comparison of decompression strategies on the example sequence \"...new product!\". indicates a boundary with high confidence (𝑃𝑡= 1.0) and G# indicates a boundary with low confidence (𝑃𝑡= 0.5). As each letter in the example is unique, we use the letters in subscripts to denote expected semantics of chunks. (a) Optimal chunking with oracle boundaries identifying linguistically meaningful units. (b) Suboptimal chunking without a smoothing module. This creates misalignment during upsampling, causing information from incorrect contexts to propagate."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 8,
+        "text": "e rather than following predetermined patterns, distinguishing H-Net from fixed compression schemes. We fixed 𝛼= 0.03 in all experiments in this paper as it provides a good balance between prediction accuracy and chunking efficiency; however, in other settings, it may be important to choose this hyperparameter more carefully. Notationally, we sometimes use (𝑁0, 𝑁1, . . . , 𝑁𝑠)-DC to denote the full dynamic chunking mechanism together with its targeted chunking ratios."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 32,
+        "text": "-bit quantized audio inputs, hence also was a form of byte-level modeling that used BPB as a metric. A.1.3 External Chunking An improvement to hierarchical architectures with static downsampling is to use content-aware chunking strategies that attempt to identify natural token boundaries based on semantic or statistical properties of the input data. Several recent models propose using the boundaries provided by an external module, with two main variations appearing. Delimiter-based methods."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 11,
+        "text": "et (1-stage) Byte 6-DC 8192 4.7 1.3B M4 + T24 + M4 1024 , 2048 H-Net (2-stage) (3,3)-DC 6.9 1.6B M4 + T1M4 + T27 + M4T1 + M4 1024 , 1536 , 2048 • H-Net (pool) is a baseline ablating the effect of a simple chunking strategy that pools every 𝑘tokens, which is expected to be weaker than all of the data-dependent chunking strategies. • H-Net (1-stage) is our full H-Net method with DC learned end-to-end (Section 2.2) with compression target 𝑁0 = 6. • H-Net (2-stage) is our full H-Net method, iterated to two nested stages using 𝑁0 = 3, 𝑁1 = 3."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 7,
+        "text": "\"du\" as shown with half-filled circles) creates alignment mismatches that disrupt information flow. With the smoothing module (see Figure 2-(c)), chunks with low confidence are smoothed with previous context, ensuring proper information propagation and enabling the model to learn optimal chunk boundaries through gradient descent. Upsampler."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  }
+]

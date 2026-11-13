@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+
+# Python environment
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Editor files
+.vscode/
+
+# Temporary and backup files
+*.bak
+results_before_*.csv
+data/*_backup*
+
+# OS files
+.DS_Store
+Thumbs.db

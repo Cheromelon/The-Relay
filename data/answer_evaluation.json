@@ -1,0 +1,677 @@
+[
+  {
+    "question_id": 1,
+    "question": "What is the role of self-attention in the Transformer architecture?",
+    "expected_paper": "1706.03762v7",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 144.36,
+    "answer": "In the Transformer, self‑attention (also called intra‑attention) is the core mechanism that lets every position in a sequence “look at” all other positions in the same sequence to build its representation.  \n* In each encoder layer the first sub‑layer is a multi‑head self‑attention mechanism; the keys, values and queries all come from the encoder’s previous layer, so every encoder position can attend to every other position in that layer【1】.  \n* In the decoder, a similar self‑attention sub‑layer allows each decoder position to attend to all earlier decoder positions (up to and including itself), enabling the model to capture dependencies across the output sequence while preserving causality【5】.  \n* Self‑attention replaces the recurrent or convolutional operations that previously limited parallelism and made long‑range dependencies hard to learn; by attending over the entire sequence in a single operation, the Transformer can learn relationships between distant positions efficiently【2】.  \n\nThus, self‑attention provides the Transformer with a flexible, parallelizable way to compute context‑aware representations for every token in both the encoder and decoder.",
+    "status": "ok",
+    "first_token_ms": 1642.5226999999722,
+    "total_ms": 2239.937699996517,
+    "tokens_in": 815,
+    "tokens_out": 336,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Attention Is All You Need",
+        "page": 3,
+        "text": "Figure 1: The Transformer - model architecture. The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively. 3.1 Encoder and Decoder Stacks Encoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 2,
+        "text": "ally for ByteNet. This makes it more difficult to learn dependencies between distant positions [12]. In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section 3.2. Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 5,
+        "text": ", the total computational cost is similar to that of single-head attention with full dimensionality. 3.2.3 Applications of Attention in our Model The Transformer uses multi-head attention in three different ways: • In \"encoder-decoder attention\" layers, the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as [38, 2, 9]."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 1,
+        "text": "ncy parsing both with large and limited training data. ∗Equal contribution. Listing order is random. Jakob proposed replacing RNNs with self-attention and started the effort to evaluate this idea. Ashish, with Illia, designed and implemented the first Transformer models and has been crucially involved in every aspect of this work. Noam proposed scaled dot-product attention, multi-head attention and the parameter-free position representation and became the other person involved in nearly every detail."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 5,
+        "text": "the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as [38, 2, 9]. • The encoder contains self-attention layers. In a self-attention layer all of the keys, values and queries come from the same place, in this case, the output of the previous layer in the encoder. Each position in the encoder can attend to all positions in the previous layer of the encoder. • Similarly, self-attention layers in the decoder allow each position in the decoder to attend to all positions in the decoder up to and including that position."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 2,
+    "question": "Why does the Transformer use multi-head attention?",
+    "expected_paper": "1706.03762v7",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 218.17,
+    "answer": "The Transformer uses multi‑head attention for several reasons:\n\n1. **Jointly attend to multiple representation subspaces** – By projecting the queries, keys and values into several lower‑dimensional subspaces and computing attention in each one, the model can capture different types of relationships simultaneously. This is described as “jointly attend to information from different representation subspaces at different positions”【Attention Is All You Need, p. 5】.\n\n2. **Avoid the loss of resolution caused by averaging** – A single attention head averages over the weighted positions, which can reduce the effective resolution of the representation. Multi‑head attention counteracts this effect, allowing the model to preserve finer details【Attention Is All You Need, p. 2】.\n\n3. **Enable full encoder‑decoder interaction** – In the encoder‑decoder attention layers, each decoder position can attend over all encoder positions. Multi‑head attention is used in this context to provide that global interaction, mimicking traditional encoder‑decoder mechanisms【Attention Is All You Need, p. 5】.\n\n4. **Support self‑attention in each encoder and decoder layer** – Every encoder and decoder layer contains a multi‑head self‑attention sub‑layer, which is a core part of the Transformer’s architecture【Attention Is All You Need, p. 3】.",
+    "status": "ok",
+    "first_token_ms": 1063.2112000021152,
+    "total_ms": 1798.179600002186,
+    "tokens_in": 815,
+    "tokens_out": 480,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Attention Is All You Need",
+        "page": 5,
+        "text": ", the total computational cost is similar to that of single-head attention with full dimensionality. 3.2.3 Applications of Attention in our Model The Transformer uses multi-head attention in three different ways: • In \"encoder-decoder attention\" layers, the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as [38, 2, 9]."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 2,
+        "text": "ally for ByteNet. This makes it more difficult to learn dependencies between distant positions [12]. In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section 3.2. Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 3,
+        "text": "Figure 1: The Transformer - model architecture. The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively. 3.1 Encoder and Decoder Stacks Encoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 14,
+        "text": "ad> Figure 4: Two attention heads, also in layer 5 of 6, apparently involved in anaphora resolution. Top: Full attentions for head 5. Bottom: Isolated attentions from just the word ‘its’ for attention heads 5 and 6. Note that the attentions are very sharp for this word. 14"
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 5,
+        "text": "output values. These are concatenated and once again projected, resulting in the final values, as depicted in Figure 2. Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. MultiHead(Q, K, V ) = Concat(head1, ..., headh)W O where headi = Attention(QW Q i , KW K i , V W V i ) Where the projections are parameter matrices W Q i ∈Rdmodel×dk, W K i ∈Rdmodel×dk, W V i ∈Rdmodel×dv and W O ∈Rhdv×dmodel."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 3,
+    "question": "What is positional encoding and why is it needed?",
+    "expected_paper": "1706.03762v7",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 141.99,
+    "answer": "**Positional encoding** is a vector that is added to each token’s input embedding to give the model information about that token’s position in the sequence.  \nBecause the Transformer architecture contains no recurrence or convolution, it has no inherent sense of order; the self‑attention layers treat all positions symmetrically. To allow the model to use the order of the sequence, the authors inject positional encodings into the embeddings at the bottoms of both the encoder and decoder stacks. These encodings have the same dimensionality as the embeddings so that they can be summed directly with the token embeddings. The paper notes that positional encodings can be either learned or fixed (e.g., sinusoidal) [Attention Is All You Need, p. 6].  \n\nThus, positional encoding is needed to provide the Transformer with relative or absolute positional information that would otherwise be absent due to the lack of recurrence or convolution.",
+    "status": "ok",
+    "first_token_ms": 475.3372999985004,
+    "total_ms": 723.2112999990932,
+    "tokens_in": 793,
+    "tokens_out": 309,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Attention Is All You Need",
+        "page": 6,
+        "text": "· n · d) O(1) O(n/r) 3.5 Positional Encoding Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add \"positional encodings\" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension dmodel as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed [9]."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 3,
+        "text": "ttention sub-layer in the decoder stack to prevent positions from attending to subsequent positions. This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position i can depend only on the known outputs at positions less than i. 3.2 Attention An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum 3"
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 9,
+        "text": "ation, ensuring both contribute meaningfully to the final representation. Separation of Two Streams. Encoder outputs (ˆ𝑥) serve dual purposes in our architecture: passing fine-grained information to corresponding decoders through residual connections, and providing compressed representations as inputs to subsequent stages. This dual functionality creates a design challenge, as these two roles may benefit from different representations."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 5,
+        "text": "the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as [38, 2, 9]. • The encoder contains self-attention layers. In a self-attention layer all of the keys, values and queries come from the same place, in this case, the output of the previous layer in the encoder. Each position in the encoder can attend to all positions in the previous layer of the encoder. • Similarly, self-attention layers in the decoder allow each position in the decoder to attend to all positions in the decoder up to and including that position."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 8,
+        "text": "position, ensuring that each reconstructed position receives information from its most recent chunk. This maintains the sequential flow of information while expanding the compressed representation back to its original length. • Confidence-weighted decompression (9): Multiplying upsampled vectors by their confidence scores incentivizes the routing module to make confident, accurate decisions. High-confidence boundaries create direct reward signals that encourage the model to sharpen its boundary predictions through gradient feedback."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 4,
+    "question": "How does scaled dot-product attention work?",
+    "expected_paper": "1706.03762v7",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 177.27,
+    "answer": "Scaled dot‑product attention is a lightweight attention mechanism that operates on three sets of vectors: **queries** \\(Q\\), **keys** \\(K\\), and **values** \\(V\\).  \n1. **Compute compatibility scores** – For each query vector \\(q\\) and key vector \\(k\\) the dot product \\(q \\cdot k\\) is calculated.  \n2. **Scale the scores** – Because the dot products grow in magnitude with the dimensionality \\(d_k\\) of the keys, the scores are divided by \\(\\sqrt{d_k}\\) to keep them in a range where the softmax function has useful gradients【Attention Is All You Need, p. 4】.  \n3. **Apply softmax** – The scaled scores are passed through a softmax to obtain a probability distribution over the keys, giving a weight for each value.  \n4. **Weighted sum of values** – Each value vector \\(v\\) is multiplied by its corresponding weight and the results are summed to produce the output for that query.  \n5. **Multi‑head extension** – The same process is performed in parallel on \\(h\\) different linear projections of \\(Q\\), \\(K\\), and \\(V\\), producing \\(h\\) independent attention outputs that are then concatenated and linearly transformed back to the model dimension【Attention Is All You Need, p. 4】.  \n\nThus, scaled dot‑product attention efficiently computes attention weights by leveraging fast matrix multiplication while mitigating the risk of vanishing gradients for large key dimensions.",
+    "status": "ok",
+    "first_token_ms": 1220.7333000042127,
+    "total_ms": 2019.1367000006721,
+    "tokens_in": 724,
+    "tokens_out": 496,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Attention Is All You Need",
+        "page": 4,
+        "text": "Scaled Dot-Product Attention Multi-Head Attention Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel. of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key. 3.2.1 Scaled Dot-Product Attention We call our particular attention \"Scaled Dot-Product Attention\" (Figure 2). The input consists of queries and keys of dimension dk, and values of dimension dv."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 4,
+        "text": "y, additive attention outperforms dot product attention without scaling for larger values of dk [3]. We suspect that for large values of dk, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients 4. To counteract this effect, we scale the dot products by 1 √dk ."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 4,
+        "text": "it has extremely small gradients 4. To counteract this effect, we scale the dot products by 1 √dk . 3.2.2 Multi-Head Attention Instead of performing a single attention function with dmodel-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values h times with different, learned linear projections to dk, dk and dv dimensions, respectively."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 4,
+        "text": "tention computes the compatibility function using a feed-forward network with a single hidden layer. While the two are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. While for small values of dk the two mechanisms perform similarly, additive attention outperforms dot product attention without scaling for larger values of dk [3]."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 4,
+        "text": "values h times with different, learned linear projections to dk, dk and dv dimensions, respectively. On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding dv-dimensional 4To illustrate why the dot products get large, assume that the components of q and k are independent random variables with mean 0 and variance 1. Then their dot product, q · k = Pdk i=1 qiki, has mean 0 and variance dk. 4"
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 5,
+    "question": "What is the purpose of masking in the Transformer decoder?",
+    "expected_paper": "1706.03762v7",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 193.15,
+    "answer": "The masking applied in the Transformer decoder is used to enforce **causality**—i.e., each position in the output sequence is allowed to attend only to itself and earlier positions, not to future tokens. This causal masking preserves the model’s compatibility with streaming inference, allowing the decoder to generate tokens one at a time in a real‑time setting【1】.",
+    "status": "ok",
+    "first_token_ms": 1525.8691999988514,
+    "total_ms": 2744.364999998652,
+    "tokens_in": 775,
+    "tokens_out": 401,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 10,
+        "text": "ausal masking, which preserves the compatibility of the whole architecture with streaming inference. Both Transformers prove to be useful with regard to perceived audio quality, while Transformer in the encoder also improves the distillation of semantic information described below (see Table 3 for ablation studies). Causality and streaming. With the mentioned hyper-parameters, Mimi is causal and can be used in a streaming fashion, both for encoding and decoding."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 9,
+        "text": "ation, ensuring both contribute meaningfully to the final representation. Separation of Two Streams. Encoder outputs (ˆ𝑥) serve dual purposes in our architecture: passing fine-grained information to corresponding decoders through residual connections, and providing compressed representations as inputs to subsequent stages. This dual functionality creates a design challenge, as these two roles may benefit from different representations."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 19,
+        "text": "uld expect that encoders/decoders using some Mamba layers to be better than pure Transformer layers. As demonstrated in Figure 10, Mamba layers prove significantly important even when processing BPE tokens rather than raw bytes, providing evidence for the second hypothesis. We hypothesize that this consistent advantage across input granularities stems from fundamental architectural differences between SSMs and Transformers. While Transformers naturally store complete key-value caches for all positions, SSMs are designed to compress information into fixed-size states."
+      },
+      {
+        "paper": "Attention Is All You Need",
+        "page": 3,
+        "text": "Figure 1: The Transformer - model architecture. The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively. 3.1 Encoder and Decoder Stacks Encoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 20,
+        "text": "he waveform, with a value of 1 when the speaker is active based on the diarization, and 0 otherwise. This mask provides us with two waveforms: one with the speaker, and one with the residual (potentially several speakers), which are encoded separately and then used as the two input audio streams described in Section 3.4.3. The text stream only contains the text tokens from the selected main speaker, and we no longer use a variable delay between the text and audio streams."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 6,
+    "question": "What is Moshi and what problem does it address?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 146.76,
+    "answer": "**Moshi** is a speech‑text foundation model designed for real‑time dialogue.  It is initialized randomly and pretrained only on audio data (without an Inner Monologue) and learns to generate both acoustic tokens and text/semantic tokens in a hierarchical, full‑duplex fashion【Passage 1, Page 28】【Passage 5, Page 6】.  \n\nThe model addresses the shortcomings of earlier audio‑language models that either only model semantic tokens or only text.  By jointly modeling acoustic and semantic streams, Moshi can listen and speak simultaneously, produce speech in real time, and generate a wide range of emotions, voices, and acoustic conditions—overcoming the many challenges that have previously hindered spoken‑dialogue systems【Passage 2, Page 6】【Passage 5, Page 6】.",
+    "status": "ok",
+    "first_token_ms": 1580.995600001188,
+    "total_ms": 2707.663600005617,
+    "tokens_in": 820,
+    "tokens_out": 678,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "s to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone. Finally, as the model produces acoustic tokens along with text and semantic tokens, it can generate an arbitrary range of emotions, voices and acoustic conditions. To the best of our knowledge, Moshi is the first audio language model that successfully addresses the many aforementioned challenges of spoken dialogue."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 17,
+        "text": "s between the user and Moshi: Moshi can speak and listen at all time, and do both at once if needed. In particular, when the user speaks and Moshi stays silent, the corresponding audio tokens for Moshi’s stream decode into “natural silence”, a near silent waveform, instead of having a fixed, well defined value; At the same time, Moshi’s text stream will be filled with PAD tokens. As a result, the text stream can provide interesting ways of controlling Moshi, for instance, forcing the sampling of a EPAD token will make Moshi start talking immediately."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 35,
+        "text": "ining phases and calibration datasets, to preserve all of Moshi’s abilities lost after quantization. 6 Safety In parallel with the development of Moshi, we explore different directions related to the safety of AI generated content. In this section, we specifically consider several questions regarding the content generated by Moshi, each addressed in a dedicated subsection: 1. How does our model behave in terms of producing toxic content? 2. How to avoid that the model regurgitates audio content from the training set? 3."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 7,
+    "question": "How does Moshi support real-time spoken dialogue?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 134.43,
+    "answer": "Moshi supports real‑time spoken dialogue by generating speech and text in a streaming, hierarchical fashion.  \nIts architecture combines a bespoke text‑language‑model backbone (Helium) with a neural audio codec that uses residual vector quantization and semantic knowledge distilled from a self‑supervised speech model (Mimi). During interaction, Moshi produces semantic tokens, acoustic tokens, and time‑aligned text tokens for both the user and the system in a continuous stream. This streaming generation allows the model to respond immediately to user speech, while the audio codec lets it synthesize speech with a wide range of emotions, voices, and acoustic conditions on the fly. The design makes Moshi the first audio‑language model that can handle the full set of challenges of real‑time spoken dialogue【Passage 1】【Passage 4】.",
+    "status": "ok",
+    "first_token_ms": 689.5624000026146,
+    "total_ms": 914.3685000017285,
+    "tokens_in": 826,
+    "tokens_out": 495,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner M"
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 18,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue of 2000 hours of phone conversations between randomly paired participants, with a given topic to discuss. A property of Fisher is that each conversation side is recorded on a separate channels, which allows providing ground-truth separated streams to Moshi. The original audio is sampled at 8kHz, and we use AudioSR (Liu et al., 2023a) to upsample it to 24kHz."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "s to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone. Finally, as the model produces acoustic tokens along with text and semantic tokens, it can generate an arbitrary range of emotions, voices and acoustic conditions. To the best of our knowledge, Moshi is the first audio language model that successfully addresses the many aforementioned challenges of spoken dialogue."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 2,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue 1 Introduction Voice has provided a convenient interface to early conversational systems, from Alexa1 to Siri2 and Google Assistant.3 In this context, a “wake word” spoken by the user typically triggers an automatic speech recognition (ASR) system which transcribes the subsequent user’s request. Then, a natural language understanding (NLU) pipeline converts this query to a structured format used to produce a text answer through natural language generation (NLG)."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 8,
+    "question": "What is the role of the text and audio representations in Moshi?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 143.43,
+    "answer": "**Role of the representations in Moshi**\n\n| Representation | Purpose in Moshi | Key evidence |\n|----------------|------------------|--------------|\n| **Text tokens** | • Provide a language‑model backbone (Helium) that drives the linguistic content of the dialogue.<br>• Are time‑aligned with the audio stream, allowing Moshi to “speak and listen at all time” and to use text tokens for control (e.g., forcing an EPAD token makes Moshi start speaking immediately).<br>• Enable full‑duplex operation by filling the text stream with PAD tokens when Moshi is silent, while the audio stream decodes into natural silence. | (Moshi: a speech‑text foundation model for real‑time dialogue, p. 6) “Moshi can speak and listen at all time… the text stream will be filled with PAD tokens… forcing the sampling of a EPAD token will make Moshi start talking immediately.” (p. 17) |\n| **Audio tokens** | • Capture the acoustic waveform through a neural audio codec (residual vector quantization) that also incorporates semantic knowledge distilled from a self‑supervised speech model (Mimi).<br>• Are generated hierarchically alongside semantic tokens, allowing Moshi to produce speech in real time while also modelling non‑lingu",
+    "status": "ok",
+    "first_token_ms": 2510.749000000942,
+    "total_ms": 2907.0475999978953,
+    "tokens_in": 844,
+    "tokens_out": 700,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "s to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone. Finally, as the model produces acoustic tokens along with text and semantic tokens, it can generate an arbitrary range of emotions, voices and acoustic conditions. To the best of our knowledge, Moshi is the first audio language model that successfully addresses the many aforementioned challenges of spoken dialogue."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 17,
+        "text": "s between the user and Moshi: Moshi can speak and listen at all time, and do both at once if needed. In particular, when the user speaks and Moshi stays silent, the corresponding audio tokens for Moshi’s stream decode into “natural silence”, a near silent waveform, instead of having a fixed, well defined value; At the same time, Moshi’s text stream will be filled with PAD tokens. As a result, the text stream can provide interesting ways of controlling Moshi, for instance, forcing the sampling of a EPAD token will make Moshi start talking immediately."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner M"
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 9,
+    "question": "What is the purpose of Moshi's streaming architecture?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 140.02,
+    "answer": "Moshi’s streaming architecture is designed to enable **full‑duplex, real‑time spoken dialogue**.  \nBy modeling two streams—semantic (text) and acoustic (audio) tokens—hierarchically, the system can simultaneously listen to the user and generate speech, exploiting both linguistic and non‑linguistic information from the user while producing output in real time【2, Page 6】.  The architecture allows Moshi to speak and listen at all times, even speaking and listening concurrently if needed【1, Page 17】, and it is implemented as a multi‑stream speech‑to‑speech Transformer that supports this full‑duplex capability【4, Page 6】.",
+    "status": "ok",
+    "first_token_ms": 474.8128999999608,
+    "total_ms": 751.6663999995217,
+    "tokens_in": 786,
+    "tokens_out": 366,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 17,
+        "text": "s between the user and Moshi: Moshi can speak and listen at all time, and do both at once if needed. In particular, when the user speaks and Moshi stays silent, the corresponding audio tokens for Moshi’s stream decode into “natural silence”, a near silent waveform, instead of having a fixed, well defined value; At the same time, Moshi’s text stream will be filled with PAD tokens. As a result, the text stream can provide interesting ways of controlling Moshi, for instance, forcing the sampling of a EPAD token will make Moshi start talking immediately."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 17,
+        "text": "audio coming from the user (k > 2+Q) is actually ignored, as the actual user audio is used instead. However, modeling the user stream as output allows generating simulated dialogues, which is necessary for offline evaluation as in Section 5.6. Interestingly, there is no explicit boundaries for the change of turns between the user and Moshi: Moshi can speak and listen at all time, and do both at once if needed."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "io language model that successfully addresses the many aforementioned challenges of spoken dialogue. 3 Model 3.1 Overview Moshi is a multi-stream speech-to-speech Transformer model, which allows for full-duplex spoken dialogue with a user thanks to an innovative architecture summarized in Figure 1. 6"
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 10,
+    "question": "What challenges does Moshi address in real-time dialogue?",
+    "expected_paper": "2410.00037v1",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 207.67,
+    "answer": "The provided papers do not contain enough information to answer this.",
+    "status": "ok",
+    "first_token_ms": 523.9189999992959,
+    "total_ms": 580.5848000018159,
+    "tokens_in": 827,
+    "tokens_out": 171,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 28,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue initialized randomly and pretrained only on audio data and without Inner Monologue. The second category includes models that start from a pretrained text LM and are then only trained on audio. This includes TWIST-13B as well as the audio-only version of VoxtLM (first row of (Maiti et al., 2023, Table 3)) and that of Spirit-LM (reported as “Speech Only” in (Nguyen et al., 2024, Table 5))."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner M"
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 6,
+        "text": "s to text pretraining and Inner Monologue, Moshi benefits from the knowledge of its Helium backbone. Finally, as the model produces acoustic tokens along with text and semantic tokens, it can generate an arbitrary range of emotions, voices and acoustic conditions. To the best of our knowledge, Moshi is the first audio language model that successfully addresses the many aforementioned challenges of spoken dialogue."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 18,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue of 2000 hours of phone conversations between randomly paired participants, with a given topic to discuss. A property of Fisher is that each conversation side is recorded on a separate channels, which allows providing ground-truth separated streams to Moshi. The original audio is sampled at 8kHz, and we use AudioSR (Liu et al., 2023a) to upsample it to 24kHz."
+      },
+      {
+        "paper": "Moshi: a speech-text foundation model for real-time dialogue",
+        "page": 2,
+        "text": "Moshi: a speech-text foundation model for real-time dialogue 1 Introduction Voice has provided a convenient interface to early conversational systems, from Alexa1 to Siri2 and Google Assistant.3 In this context, a “wake word” spoken by the user typically triggers an automatic speech recognition (ASR) system which transcribes the subsequent user’s request. Then, a natural language understanding (NLU) pipeline converts this query to a structured format used to produce a text answer through natural language generation (NLG)."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 11,
+    "question": "What is dynamic chunking?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 168.49,
+    "answer": "Dynamic chunking (DC) is a data‑dependent, context‑aware segmentation mechanism that learns how to split a sequence into variable‑length chunks during training.  \n* It uses a **routing module** to decide where chunk boundaries should be placed, and a **downsampler** that keeps only the vectors at those boundaries, thereby reducing sequence length while preserving semantically important positions【Passage 3, Page 3】.  \n* Because the boundaries are learned end‑to‑end, the model can compress low‑information regions and allocate more computation to high‑information content, improving efficiency and modeling power over fixed‑size or heuristic tokenizers【Passage 2, Page 6】【Passage 4, Page 2】.  \n* Dynamic chunking replaces handcrafted heuristics with content‑ and context‑aware segmentation learned directly from data, and can be iterated across multiple hierarchical stages to build nested feature hierarchies【Passage 1, Page 12】【Passage 5, Page 33】.",
+    "status": "ok",
+    "first_token_ms": 845.673199997691,
+    "total_ms": 1367.8212000013446,
+    "tokens_in": 777,
+    "tokens_out": 308,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 12,
+        "text": "ffect of data-dependent chunking strategies together with a well-designed hierarchical architecture. • H-Net (1-stage) is stronger than H-Net (space), validating that our dynamic chunking mechanism successfully learns how to segment data in a context-dependent way that improves over strong heuristics. • H-Net (2-stage) is significantly better than H-Net (1-stage), validating that iterated dynamic chunking can potentially learn a nested hierarchy of useful features, and leverage compute and parameters even more effectively. XL Scale."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 6,
+        "text": "aries through end-to-end training, allowing it to identify semantically meaningful units adaptively. Furthermore, this dynamic approach enables the model to allocate computational resources efficiently by compressing low-information regions while preserving high-information content at appropriate granularity. 2.2.1 Chunking Layer The chunking layer (Chunk in equation (2)) contains a routing module and downsampler, as illustrated in Figure 1( bottom-right ). Routing Module. In natural data, meaningful boundaries tend to emerge at points of contextual or semantic shift."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 3,
+        "text": "ctural overview of H-Net with a two-stage hierarchical design (𝑆= 2). (right) Dynamic Chunking (DC). ( bottom-right ) Key components of a chunking layer: (a) a routing module for dynamically drawing chunk boundaries, and (b) a downsampler that selectively retains vectors based on boundary indicators, reducing sequence length while preserving semantically significant positions."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 2,
+        "text": "at compresses raw data through a recursive, data-dependent dynamic chunking (DC) process (Figure 1). H-Nets match the efficiency of tokenized pipelines while substantially improving modeling ability, by replacing handcrafted heuristics with content-aware and context-dependent segmentation learned from data. Hierarchical Processing. The H-Net adopts the hierarchical architecture from prior work (Goel et al. 2022; Nawrot, Tworkowski, et al."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 33,
+        "text": "itive to the entropy-based chunking strategy of BLT (for our main experiments such as English data). A.1.4 Dynamic Chunking The ideal tokenizer-free architecture would incorporate a dynamic chunking method that attempts to learn optimal segmentation strategies directly from data through gradient-based optimization. Such a method would be optimized jointly together with the outer (fine-resolution) and inner (coarse-resolution) networks, and be able to create boundaries that are content- and context- aware."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 12,
+    "question": "Why is hierarchical sequence modeling useful?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 180.82,
+    "answer": "Hierarchical sequence modeling is useful for several reasons that are highlighted in the provided passages:\n\n1. **Improved long‑context handling** – A global hierarchical structure can enhance a model’s ability to process long sequences, which is a common motivation for hierarchical designs【Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, p. 22】.\n\n2. **Efficient state representation** – By using deeper hierarchies with recurrent layers, the model can keep linear computation in sequence length while reducing the state size to logarithmic order, similar to log‑linear attention mechanisms【Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, p. 22】.\n\n3. **Building higher‑level abstractions** – Hierarchical chunking turns raw data into higher‑level abstractions (e.g., subword tokens in language models), a process that is central to intelligence and improves general sequence modeling across many settings【Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, p. 4】.\n\n4. **Applicability to domains without clear segmentation cues** – In areas such as DNA, where handcrafted tokens or BPE approaches struggle, hierarchical modeling can capture higher‑resolution structures (codons, regulatory elements) that are otherwise hard to represent【Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, p. 16】.\n\nTogether, these points show that hierarchical sequence modeling is valuable for handling long contexts, reducing computational overhead, creating meaningful abstractions, and extending applicability to challenging domains.",
+    "status": "ok",
+    "first_token_ms": 1435.0812999982736,
+    "total_ms": 1785.5897999979788,
+    "tokens_in": 915,
+    "tokens_out": 664,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 22,
+        "text": "ntion (Guo et al. 2025) and Prefix Scannable Models (Yau et al. 2025), but with dynamic hierarchies. Similarly, the recursive compression of sequence length may alleviate their limitations in retrieval on long sequences. This may be considered a form of dynamic state allocation. This paper has not focused on such implications, which would be a possible direction for future research. Long Context. Similarly, an effect of the global hierarchical structure may be improved long context abilities, which is a common motivation for hierarchical models (Koutnik et al. 2014; Chang et al. 2017)."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 22,
+        "text": "the expense of precise retrieval of information (e.g. struggling with recall (Jelassi et al. 2024)). H-Net, however, is a global architectural design that is simultaneously orthogonal to, but may have interactive effects with, the choice of individual layers. For example, using deeper hierarchies with exclusively recurrent layers would preserve linear computation (in sequence length) but logarithmic state size, resembling newer sequence model layers such as log-linear attention (Guo et al. 2025) and Prefix Scannable Models (Yau et al. 2025), but with dynamic hierarchies."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 22,
+        "text": "ties, which is a common motivation for hierarchical models (Koutnik et al. 2014; Chang et al. 2017). Much research on sequence models again focuses on long context at the layer level (Poli et al. 2023; Gu and Dao 2024; Vaswani et al. 2017), and we hypothesize that H-Nets may provide general long context improvements in an orthogonal direction. Latent Test-Time Compute. Test-time compute techniques, exemplified by Chain-of-Thought (Wei et al. 2022), have been shown to improve model performance on a variety of reasoning benchmarks (Muennighoff, Yang, et al. 2025; OpenAI 2024)."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 16,
+        "text": "nome). DNA is a setting that presents both a unique promise and challenge for hierarchical modeling. For one, handcrafted tokens do not work well on DNA, due to the lack of segmentation cues. Additionally, the same sequence of base pairs may serve different functions (e.g., depending on whether or not the pair is inside a gene or not). Consequently, a naive BPE-based approach may not work either. On the other hand, DNA can exhibit higher resolution structure (e.g., codons, various regulatory elements), suggesting that there is room for principled hierarchical modeling."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 4,
+        "text": "Hierarchical Chunking: From Data to Abstractions Beyond addressing tokenization, H-Net improves general sequence modeling across a wide range of settings. Subword tokenization in language models is a special case of chunking—the process of building higher-level abstractions from low-level data—and is a central component of intelligence.4 Crucially, because H-Net is fully end-to-end, it can be iterated recursively: the main network can itself be an H-Net."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 13,
+    "question": "How does dynamic chunking affect sequence processing?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 167.16,
+    "answer": "Dynamic chunking changes the way a model processes a sequence by letting the network learn where to split the raw input instead of relying on fixed tokenization rules.  \n* **Compression and efficiency** – The H‑Net compresses raw data through a recursive, data‑dependent dynamic chunking (DC) process (Figure 1). This lets the model match the efficiency of tokenized pipelines while improving modeling ability, because the segmentation is learned from the data rather than imposed by heuristics【Passage 4】.  \n* **Content‑ and context‑aware boundaries** – The dynamic chunking module is optimized jointly with the outer (fine‑resolution) and inner (coarse‑resolution) networks, producing boundaries that are sensitive to the actual content and surrounding context. This joint optimization yields segmentation that is more linguistically meaningful than static tokenizers【Passage 5】.  \n* **Reduced misalignment** – When chunking is performed without a smoothing module, suboptimal boundaries cause misalignment during up‑sampling, leading to the propagation of information from incorrect contexts. A properly learned dynamic chunking strategy mitigates this misalignment and keeps the up‑sampling aligned with the true semantic units【Passage 3】.  \n* **Improved data efficiency** – In languages and modalities where tokenization heuristics are weak (e.g., Chinese, code, DNA), the H‑Net’s dynamic chunking yields nearly a 4× improvement in data efficiency over baselines, demonstrating that learning segmentation end‑to‑end can scale better from unprocessed data【Passage 1】.  \n\nIn short, dynamic chunking lets the model learn to segment sequences in a data‑driven, context‑aware way, which compresses the input, reduces alignment errors, and boosts overall modeling performance.",
+    "status": "ok",
+    "first_token_ms": 931.3951000003726,
+    "total_ms": 1555.4693000012776,
+    "tokens_in": 811,
+    "tokens_out": 693,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 1,
+        "text": "learn meaningful data-dependent chunking strategies without any heuristics or explicit supervision. Finally, the H-Net’s improvement over tokenized pipelines is further increased in languages and modalities with weaker tokenization heuristics, such as Chinese and code, or DNA sequences (nearly 4× improvement in data efficiency over baselines), showing the potential of true end-to-end models that learn and scale better from unprocessed data."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 1,
+        "text": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling Sukjun Hwang Carnegie Mellon University sukjunh@cs.cmu.edu Brandon Wang Cartesia AI brandon.wang@cartesia.ai Albert Gu Carnegie Mellon University, Cartesia AI agu@cs.cmu.edu, albert@cartesia.ai Abstract Major progress on language models (LMs) in recent years has largely resulted from moving away from specialized models designed for specific tasks, to general models based on powerful architectures (e.g. the Transformer) that learn everything from raw data."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 7,
+        "text": "u c t ! Figure 2: Comparison of decompression strategies on the example sequence \"...new product!\". indicates a boundary with high confidence (𝑃𝑡= 1.0) and G# indicates a boundary with low confidence (𝑃𝑡= 0.5). As each letter in the example is unique, we use the letters in subscripts to denote expected semantics of chunks. (a) Optimal chunking with oracle boundaries identifying linguistically meaningful units. (b) Suboptimal chunking without a smoothing module. This creates misalignment during upsampling, causing information from incorrect contexts to propagate."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 2,
+        "text": "at compresses raw data through a recursive, data-dependent dynamic chunking (DC) process (Figure 1). H-Nets match the efficiency of tokenized pipelines while substantially improving modeling ability, by replacing handcrafted heuristics with content-aware and context-dependent segmentation learned from data. Hierarchical Processing. The H-Net adopts the hierarchical architecture from prior work (Goel et al. 2022; Nawrot, Tworkowski, et al."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 33,
+        "text": "itive to the entropy-based chunking strategy of BLT (for our main experiments such as English data). A.1.4 Dynamic Chunking The ideal tokenizer-free architecture would incorporate a dynamic chunking method that attempts to learn optimal segmentation strategies directly from data through gradient-based optimization. Such a method would be optimized jointly together with the outer (fine-resolution) and inner (coarse-resolution) networks, and be able to create boundaries that are content- and context- aware."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 14,
+    "question": "What is the relationship between chunk size and computational efficiency?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 143.04,
+    "answer": "The papers indicate that **larger chunk sizes tend to improve computational efficiency** by reducing the number of tokens that the model must process and by allowing the model’s parameters to be used more efficiently.  \n- The authors note that “the chunk size can directly be increased to leverage parameters more efficiently”【Passage 4, Page 34】.  \n- They further explain that “more iterations of hierarchy can be added (increasing effective chunk size), or the chunk size can directly be increased to leverage parameters more efficiently”【Passage 5, Page 34】.  \n\nThus, increasing chunk size (or adding more hierarchical stages) is associated with better computational efficiency, while the hyper‑parameter α is tuned to balance prediction accuracy against this efficiency trade‑off【Passage 1, Page 8】.",
+    "status": "ok",
+    "first_token_ms": 1194.8801999969874,
+    "total_ms": 1407.2488999954658,
+    "tokens_in": 1004,
+    "tokens_out": 600,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 8,
+        "text": "e rather than following predetermined patterns, distinguishing H-Net from fixed compression schemes. We fixed 𝛼= 0.03 in all experiments in this paper as it provides a good balance between prediction accuracy and chunking efficiency; however, in other settings, it may be important to choose this hyperparameter more carefully. Notationally, we sometimes use (𝑁0, 𝑁1, . . . , 𝑁𝑠)-DC to denote the full dynamic chunking mechanism together with its targeted chunking ratios."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 11,
+        "text": "et (1-stage) Byte 6-DC 8192 4.7 1.3B M4 + T24 + M4 1024 , 2048 H-Net (2-stage) (3,3)-DC 6.9 1.6B M4 + T1M4 + T27 + M4T1 + M4 1024 , 1536 , 2048 • H-Net (pool) is a baseline ablating the effect of a simple chunking strategy that pools every 𝑘tokens, which is expected to be weaker than all of the data-dependent chunking strategies. • H-Net (1-stage) is our full H-Net method with DC learned end-to-end (Section 2.2) with compression target 𝑁0 = 6. • H-Net (2-stage) is our full H-Net method, iterated to two nested stages using 𝑁0 = 3, 𝑁1 = 3."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 11,
+        "text": "Table 1: Architectures for main language models, all data-/FLOP-matched. E0, D0 , E1, D1 , M . T and M denote a Transformer and a Mamba-2 layer, respectively. For hierarchical byte-level models, the Tokenizer column lists the chunking mechanism. The numbers before DC indicate downsampling factor 𝑁in equation (10); for example, (3,3)-DC denotes 𝑁0 = 𝑁1 = 3. The BPIC (Bytes-Per-Innermost-Chunk) measure shows that each chunk dynamically determined by our 1-stage comprises similar number of bytes to the GPT-2 tokenizer, despite aiming for 𝑁0 = 6."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 34,
+        "text": "ve chunk size), or the chunk size can directly be increased to leverage parameters more efficiently. This resembles the idea of increasing a vocabulary in tokenized models (which would generally increase the average length of tokens). SuperBPE (Liu et al. 2025) shows that allowing vocabulary tokens to cross whitespace boundaries can also improve performance. This is related to H-Net’s motivation of higher-level chunking of words into phrases; empirically, Figure 4 shows how the 2-stage H-Net finds semantic multi-word groups in the inner stage. Cross-Tokenizer Transfer."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 34,
+        "text": "that it is more optimal to scale an LLM’s vocabulary together with the rest of the model parameters. In H-Nets, which are designed to operate over higher resolution raw data, the actual vocabulary can be kept minimal, but the chunking mechanism can be viewed as an implicit \"tokenizer\" with infinite vocabulary. As H-Nets scale in size, one expects that more iterations of hierarchy can be added (increasing effective chunk size), or the chunk size can directly be increased to leverage parameters more efficiently."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  },
+  {
+    "question_id": 15,
+    "question": "What limitations of fixed chunking does the paper discuss?",
+    "expected_paper": "2507.07955v2",
+    "config": "D",
+    "chunk_size": 600,
+    "overlap": 100,
+    "top_k": 5,
+    "retrieval_ms": 75.99,
+    "answer": "The paper points out several drawbacks of using a fixed, static chunking strategy:\n\n1. **Inability to capture natural token boundaries** – Static downsampling does not take the semantic or statistical properties of the input into account, so it often splits sequences at arbitrary positions that do not correspond to meaningful units. This is why the authors propose content‑aware chunking as an improvement over static downsampling【3】.\n\n2. **Mis‑alignment during up‑sampling** – When the model uses fixed boundaries, the up‑sampling step can align information from the wrong context, causing “information from incorrect contexts to propagate” and disrupting the flow of useful signal. This issue is illustrated in the paper’s discussion of suboptimal chunking without a smoothing module【1】【5】.\n\n3. **We",
+    "status": "ok",
+    "first_token_ms": 1225.990599996294,
+    "total_ms": 1303.3419999992475,
+    "tokens_in": 909,
+    "tokens_out": 700,
+    "model": "openai/gpt-oss-20b",
+    "retrieved_passages": [
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 7,
+        "text": "u c t ! Figure 2: Comparison of decompression strategies on the example sequence \"...new product!\". indicates a boundary with high confidence (𝑃𝑡= 1.0) and G# indicates a boundary with low confidence (𝑃𝑡= 0.5). As each letter in the example is unique, we use the letters in subscripts to denote expected semantics of chunks. (a) Optimal chunking with oracle boundaries identifying linguistically meaningful units. (b) Suboptimal chunking without a smoothing module. This creates misalignment during upsampling, causing information from incorrect contexts to propagate."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 8,
+        "text": "e rather than following predetermined patterns, distinguishing H-Net from fixed compression schemes. We fixed 𝛼= 0.03 in all experiments in this paper as it provides a good balance between prediction accuracy and chunking efficiency; however, in other settings, it may be important to choose this hyperparameter more carefully. Notationally, we sometimes use (𝑁0, 𝑁1, . . . , 𝑁𝑠)-DC to denote the full dynamic chunking mechanism together with its targeted chunking ratios."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 32,
+        "text": "-bit quantized audio inputs, hence also was a form of byte-level modeling that used BPB as a metric. A.1.3 External Chunking An improvement to hierarchical architectures with static downsampling is to use content-aware chunking strategies that attempt to identify natural token boundaries based on semantic or statistical properties of the input data. Several recent models propose using the boundaries provided by an external module, with two main variations appearing. Delimiter-based methods."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 11,
+        "text": "et (1-stage) Byte 6-DC 8192 4.7 1.3B M4 + T24 + M4 1024 , 2048 H-Net (2-stage) (3,3)-DC 6.9 1.6B M4 + T1M4 + T27 + M4T1 + M4 1024 , 1536 , 2048 • H-Net (pool) is a baseline ablating the effect of a simple chunking strategy that pools every 𝑘tokens, which is expected to be weaker than all of the data-dependent chunking strategies. • H-Net (1-stage) is our full H-Net method with DC learned end-to-end (Section 2.2) with compression target 𝑁0 = 6. • H-Net (2-stage) is our full H-Net method, iterated to two nested stages using 𝑁0 = 3, 𝑁1 = 3."
+      },
+      {
+        "paper": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling",
+        "page": 7,
+        "text": "\"du\" as shown with half-filled circles) creates alignment mismatches that disrupt information flow. With the smoothing module (see Figure 2-(c)), chunks with low confidence are smoothed with previous context, ensuring proper information propagation and enabling the model to learn optimal chunk boundaries through gradient descent. Upsampler."
+      }
+    ],
+    "answer_grade": "pending_manual_review"
+  }
+]

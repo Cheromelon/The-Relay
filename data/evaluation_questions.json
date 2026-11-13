@@ -1,0 +1,93 @@
+
+[
+  {
+    "id": 1,
+    "question": "What is the role of self-attention in the Transformer architecture?",
+    "expected_paper": "1706.03762v7",
+    "paper_title": "Attention Is All You Need"
+  },
+  {
+    "id": 2,
+    "question": "Why does the Transformer use multi-head attention?",
+    "expected_paper": "1706.03762v7",
+    "paper_title": "Attention Is All You Need"
+  },
+  {
+    "id": 3,
+    "question": "What is positional encoding and why is it needed?",
+    "expected_paper": "1706.03762v7",
+    "paper_title": "Attention Is All You Need"
+  },
+  {
+    "id": 4,
+    "question": "How does scaled dot-product attention work?",
+    "expected_paper": "1706.03762v7",
+    "paper_title": "Attention Is All You Need"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of masking in the Transformer decoder?",
+    "expected_paper": "1706.03762v7",
+    "paper_title": "Attention Is All You Need"
+  },
+  {
+    "id": 6,
+    "question": "What is Moshi and what problem does it address?",
+    "expected_paper": "2410.00037v1",
+    "paper_title": "Moshi: a speech-text foundation model for real-time dialogue"
+  },
+  {
+    "id": 7,
+    "question": "How does Moshi support real-time spoken dialogue?",
+    "expected_paper": "2410.00037v1",
+    "paper_title": "Moshi: a speech-text foundation model for real-time dialogue"
+  },
+  {
+    "id": 8,
+    "question": "What is the role of the text and audio representations in Moshi?",
+    "expected_paper": "2410.00037v1",
+    "paper_title": "Moshi: a speech-text foundation model for real-time dialogue"
+  },
+  {
+    "id": 9,
+    "question": "What is the purpose of Moshi's streaming architecture?",
+    "expected_paper": "2410.00037v1",
+    "paper_title": "Moshi: a speech-text foundation model for real-time dialogue"
+  },
+  {
+    "id": 10,
+    "question": "What challenges does Moshi address in real-time dialogue?",
+    "expected_paper": "2410.00037v1",
+    "paper_title": "Moshi: a speech-text foundation model for real-time dialogue"
+  },
+  {
+    "id": 11,
+    "question": "What is dynamic chunking?",
+    "expected_paper": "2507.07955v2",
+    "paper_title": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling"
+  },
+  {
+    "id": 12,
+    "question": "Why is hierarchical sequence modeling useful?",
+    "expected_paper": "2507.07955v2",
+    "paper_title": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling"
+  },
+  {
+    "id": 13,
+    "question": "How does dynamic chunking affect sequence processing?",
+    "expected_paper": "2507.07955v2",
+    "paper_title": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling"
+  },
+  {
+    "id": 14,
+    "question": "What is the relationship between chunk size and computational efficiency?",
+    "expected_paper": "2507.07955v2",
+    "paper_title": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling"
+  },
+  {
+    "id": 15,
+    "question": "What limitations of fixed chunking does the paper discuss?",
+    "expected_paper": "2507.07955v2",
+    "paper_title": "Dynamic Chunking for End-to-End Hierarchical Sequence Modeling"
+  }
+]
